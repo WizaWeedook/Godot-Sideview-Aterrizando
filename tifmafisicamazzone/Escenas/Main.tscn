@@ -1,0 +1,258 @@
+[gd_scene load_steps=19 format=3 uid="uid://h6u4nv26gaf"]
+
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_ftkew"]
+[ext_resource type="Texture2D" uid="uid://6b5acevdko2d" path="res://Assets/Fondo_Espacio.png" id="2_6j0s6"]
+[ext_resource type="Texture2D" uid="uid://cj1v245lxhq8v" path="res://Assets/Pista_aterrizaje.png" id="3_bsaby"]
+[ext_resource type="Texture2D" uid="uid://b03ug8bpmy3cy" path="res://Assets/Asteroide.png" id="4_87biq"]
+[ext_resource type="Texture2D" uid="uid://dfvm2scq4pxek" path="res://Assets/Lose.png" id="5_0xywm"]
+[ext_resource type="Texture2D" uid="uid://popjvegbd8qr" path="res://Assets/Win.png" id="6_pena4"]
+[ext_resource type="Texture2D" uid="uid://dd04x6ytq1c2b" path="res://Assets/Boton.png" id="7_cm8qy"]
+[ext_resource type="Texture2D" uid="uid://ubnlxuihbpey" path="res://Assets/Nave/Nave espacial_Arriva.png" id="8_64um6"]
+[ext_resource type="Texture2D" uid="uid://dwle034sepgno" path="res://Assets/Nave/Nave espacial.png" id="9_11yis"]
+[ext_resource type="Texture2D" uid="uid://bo2q2inb74423" path="res://Assets/Nave/Nave espacial_abajo.png" id="10_r22rc"]
+[ext_resource type="Texture2D" uid="uid://ddjkn7uq0ynjx" path="res://Assets/Nave/Nave espacial_Der.png" id="11_fkcxw"]
+[ext_resource type="Texture2D" uid="uid://ceicbln7ca6vn" path="res://Assets/Nave/Nave espacial_Izq.png" id="12_qrlbm"]
+[ext_resource type="Texture2D" uid="uid://c52p44ckcwxaf" path="res://Assets/Nave/Nave Espacial_Dead.png" id="13_0fh8a"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v7lpf"]
+radius = 27.0
+height = 242.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6muad"]
+radius = 83.1505
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_62dc2"]
+radius = 83.1505
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6onqk"]
+radius = 83.1505
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pj425"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_64um6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_64um6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_11yis")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_64um6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_64um6")
+}],
+"loop": true,
+"name": &"Boost_Arriba",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_r22rc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_r22rc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_11yis")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_r22rc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_r22rc")
+}],
+"loop": true,
+"name": &"Boost_Bajar",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_fkcxw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_fkcxw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_11yis")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_fkcxw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_fkcxw")
+}],
+"loop": true,
+"name": &"Boost_Der",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_qrlbm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_qrlbm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_11yis")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_qrlbm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_qrlbm")
+}],
+"loop": true,
+"name": &"Boost_Izq",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_0fh8a")
+}],
+"loop": true,
+"name": &"Dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_11yis")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_ftkew")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1080.0
+offset_bottom = 720.0
+texture = ExtResource("2_6j0s6")
+
+[node name="Pista" type="Sprite2D" parent="."]
+position = Vector2(542, 269)
+texture = ExtResource("3_bsaby")
+
+[node name="Area2D" type="Area2D" parent="Pista"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pista/Area2D"]
+position = Vector2(-36, 371)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_v7lpf")
+
+[node name="Bordes" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bordes"]
+position = Vector2(-79, -126)
+scale = Vector2(1.2, 1.2)
+polygon = PackedVector2Array(1117, -43, 1123, 739, -80, 733, -63, -24, -113, -70, -116, 763, 1159, 767, 1145, -90, -113, -71, -65, -30, 257.05, -33.542)
+
+[node name="Energia" type="Label" parent="."]
+offset_left = 13.0
+offset_top = 89.0
+offset_right = 141.0
+offset_bottom = 122.0
+text = "Energia restante"
+
+[node name="Velocidad" type="Label" parent="."]
+offset_left = 25.0
+offset_top = 128.0
+offset_right = 101.0
+offset_bottom = 151.0
+text = "Velocidad
+"
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Asteroides_Q" type="Sprite2D" parent="."]
+position = Vector2(749, 595)
+texture = ExtResource("4_87biq")
+
+[node name="Area2D" type="Area2D" parent="Asteroides_Q"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Asteroides_Q/Area2D"]
+shape = SubResource("CircleShape2D_6muad")
+
+[node name="Asteroides2_Q" type="Sprite2D" parent="."]
+position = Vector2(265, 646)
+texture = ExtResource("4_87biq")
+
+[node name="Area2D" type="Area2D" parent="Asteroides2_Q"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Asteroides2_Q/Area2D"]
+shape = SubResource("CircleShape2D_6muad")
+
+[node name="Asteroides" type="Sprite2D" parent="."]
+position = Vector2(210, 330)
+scale = Vector2(0.46, 0.46)
+texture = ExtResource("4_87biq")
+
+[node name="Area2D" type="Area2D" parent="Asteroides"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Asteroides/Area2D"]
+shape = SubResource("CircleShape2D_62dc2")
+
+[node name="Asteroides2" type="Sprite2D" parent="."]
+position = Vector2(991, 281)
+texture = ExtResource("4_87biq")
+
+[node name="Area2D" type="Area2D" parent="Asteroides2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Asteroides2/Area2D"]
+shape = SubResource("CircleShape2D_6onqk")
+
+[node name="Ganaste" type="TextureRect" parent="."]
+visible = false
+offset_right = 1080.0
+offset_bottom = 720.0
+texture = ExtResource("6_pena4")
+
+[node name="Boton" type="Sprite2D" parent="Ganaste"]
+position = Vector2(504, 538)
+texture = ExtResource("7_cm8qy")
+
+[node name="TextureButton" type="TextureButton" parent="Ganaste/Boton"]
+offset_left = -97.0
+offset_top = -42.0
+offset_right = 96.0
+offset_bottom = 45.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Perdiste" type="TextureRect" parent="."]
+visible = false
+offset_right = 1080.0
+offset_bottom = 720.0
+texture = ExtResource("5_0xywm")
+
+[node name="Boton" type="Sprite2D" parent="Perdiste"]
+position = Vector2(504, 538)
+texture = ExtResource("7_cm8qy")
+
+[node name="TextureButton" type="TextureButton" parent="Perdiste/Boton"]
+offset_left = -97.0
+offset_top = -42.0
+offset_right = 96.0
+offset_bottom = 45.0
+metadata/_edit_use_anchors_ = true
+
+[node name="SpriteNave" type="AnimatedSprite2D" parent="."]
+position = Vector2(524, 79)
+scale = Vector2(0.57, 0.57)
+sprite_frames = SubResource("SpriteFrames_pj425")
+animation = &"Idle"
+frame_progress = 0.140286
+
+[node name="AreaNave" type="Area2D" parent="SpriteNave"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpriteNave/AreaNave"]
+visible = false
+polygon = PackedVector2Array(-3, -71, 12, -67, 24, -56, 28, -43, 24, -24, 35, -25, 43, -17, 40, -6, 53, 20, 69, 9, 73, 13, 57, 23, 77, 34, 75, 39, 54, 27, 1, 52, 20, 67, 15, 72, -1, 57, -17, 70, -22, 66, -4, 52, -55, 29, -72, 41, -74, 37, -59, 27, -72, 18, -68, 14, -54, 24, -47, -4, -45, -17, -38, -23, -28, -22, -34, -39, -29, -57, -16, -68)
+
+[connection signal="button_down" from="Ganaste/Boton/TextureButton" to="." method="_on_texture_button_button_down"]
+[connection signal="button_down" from="Perdiste/Boton/TextureButton" to="." method="_on_texture_button_button_down"]
+[connection signal="area_entered" from="SpriteNave/AreaNave" to="." method="_on_area_nave_area_entered"]
